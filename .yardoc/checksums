@@ -1,0 +1,4 @@
+lib/statusable.rb a7e961736092bb6134de2ebb4a28ae32a3be689a
+lib/statusable/railtie.rb 15f0fc8d324767ebf5b6b7b92cb41cf72f6bdd46
+lib/statusable/version.rb 9cf74744b10a151d2bb14b36841acab74eb579d5
+lib/statusable/has_statuses.rb 68815f26c17bb28924099547eb3c66e70d6a0b21
