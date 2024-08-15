@@ -27,7 +27,11 @@ Gem::Specification.new do |spec|
       Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
     }
 
-  spec.add_runtime_dependency "rails", ">= 6"
+  spec.add_dependency "rails", ">= 6"
 
   spec.add_development_dependency "gemwork"
+
+  # Dummy Rails app dependencies.
+  spec.add_development_dependency "puma"
+  spec.add_development_dependency "sqlite3"
 end
