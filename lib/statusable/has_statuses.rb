@@ -103,6 +103,11 @@ module Statusable::HasStatuses
         statuses
       end
 
+      # #status?("Ready")
+      define_method(:"#{col_name}?") do |a_status|
+        public_send(col_name) == a_status
+      end
+
       statuses.each do |status| # rubocop:disable Metrics/BlockLength
         status_name = status.parameterize.underscore
 
@@ -153,11 +158,6 @@ module Statusable::HasStatuses
         # #not_status_ready?
         define_method(:"not_#{col_name}_#{status_name}?") do
           public_send(col_name) != status
-        end
-
-        # #status?(<a_status>)
-        define_method(:"#{col_name}?") do |a_status|
-          public_send(col_name) == a_status
         end
       end
     end
