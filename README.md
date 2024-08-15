@@ -10,8 +10,6 @@ class MyModel < ApplicationRecord
       Pending
       Running
       Completed
-      Failed
-      Canceled
     ])
 end
 ```

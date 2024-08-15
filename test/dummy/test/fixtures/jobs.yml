@@ -1,0 +1,10 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+pending_job:
+  status: Pending
+
+running_job:
+  status: Running
+
+completed_job:
+  status: Completed
