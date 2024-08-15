@@ -3,5 +3,8 @@ class Job < ApplicationRecord
       Pending
       Running
       Completed
-    ])
+    ],
+    col_name: "status",
+    validate_presence: true,
+    validate_inclusion: true)
 end

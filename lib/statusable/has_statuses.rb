@@ -12,18 +12,15 @@ module Statusable::HasStatuses
   class_methods do # rubocop:disable Metrics/BlockLength
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
-    # rubocop:disable Metrics/PerceivedComplexity
     # rubocop:disable Naming/PredicateName
     def has_statuses(
           *args,
           col_name: "status",
-          arel_column: nil,
-          validate_inclusion: true,
-          validate_presence: false)
+          validate_presence: false,
+          validate_inclusion: true)
       statuses = args.flatten.freeze
-
-      arel_column ||= arel_table[col_name]
       pluralized_column_name = col_name.to_s.pluralize
+      arel_column = arel_table[col_name]
 
       humanized_statuses_list =
         statuses.to_sentence(
@@ -31,18 +28,20 @@ module Statusable::HasStatuses
           last_word_connector: ", or ").
           freeze
 
-      if validate_inclusion
-        validates col_name,
-                  inclusion: {
-                    in: statuses,
-                    allow_blank: true,
-                    message: "must be one of #{humanized_statuses_list}",
-                  }
+      if validate_presence
+        validates(
+          col_name,
+          presence: true)
       end
 
-      if validate_presence
-        validates col_name,
-                  presence: true
+      if validate_inclusion
+        validates(
+          col_name,
+          inclusion: {
+            in: statuses,
+            allow_blank: true,
+            message: "must be one of #{humanized_statuses_list}",
+          })
       end
 
       # .for_status(<status>)
@@ -108,6 +107,11 @@ module Statusable::HasStatuses
         public_send(col_name) == a_status
       end
 
+      # #not_status?("Ready")
+      define_method(:"not_#{col_name}?") do |a_status|
+        public_send(col_name) != a_status
+      end
+
       statuses.each do |status| # rubocop:disable Metrics/BlockLength
         status_name = status.parameterize.underscore
 
@@ -162,7 +166,6 @@ module Statusable::HasStatuses
       end
     end
     # rubocop:enable Naming/PredicateName
-    # rubocop:enable Metrics/PerceivedComplexity
     # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/AbcSize
   end

@@ -12,8 +12,9 @@
 
 ActiveRecord::Schema[7.2].define(version: 2024_08_15_042345) do
   create_table "jobs", force: :cascade do |t|
-    t.string "status"
+    t.string "status", default: "Initializing", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["status"], name: "index_jobs_on_status"
   end
 end
