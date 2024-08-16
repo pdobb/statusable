@@ -2,8 +2,10 @@
 
 require "test_helper"
 
-class StatusableTest < ActiveSupport::TestCase
-  test "it has a version number" do
-    assert Statusable::VERSION
+class StatusableTest < Minitest::Spec
+  describe Statusable do
+    it "has a VERSION" do
+      value(Statusable::VERSION).wont_be_nil
+    end
   end
 end

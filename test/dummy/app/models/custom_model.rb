@@ -1,10 +1,10 @@
-class Job < ApplicationRecord
+class CustomModel < ApplicationRecord
   has_statuses(%w[
       Pending
       Running
       Completed
     ],
-    col_name: "status",
+    col_name: "lifecycle_state",
     validate_presence: true,
-    validate_inclusion: true)
+    validate_inclusion: false)
 end

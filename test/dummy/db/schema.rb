@@ -10,11 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_15_042345) do
-  create_table "jobs", force: :cascade do |t|
+ActiveRecord::Schema[7.2].define(version: 2024_08_15_142345) do
+  create_table "custom_models", force: :cascade do |t|
+    t.string "lifecycle_state", default: "Initializing", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lifecycle_state"], name: "index_custom_models_on_lifecycle_state"
+  end
+
+  create_table "default_models", force: :cascade do |t|
     t.string "status", default: "Initializing", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["status"], name: "index_jobs_on_status"
+    t.index ["status"], name: "index_default_models_on_status"
   end
 end
