@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+### 0.3.0.pre - 2018-08-26
 - Can now check if any of an array of statuses matches when using #status?
 
 ```ruby

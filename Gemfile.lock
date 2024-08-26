@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    statusable (0.2.0.pre)
+    statusable (0.3.0.pre)
       rails (>= 6)
 
 GEM
