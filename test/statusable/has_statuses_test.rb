@@ -143,12 +143,35 @@ class Statusable::HasStatusesTest < Minitest::Spec
 
       describe "Predicates" do
         context "#status?" do
-          it "returns true, GIVEN a matching status" do
-            value(pending_model.status?("Pending")).must_equal(true)
+          context "GIVEN a single status" do
+            it "returns true, GIVEN a matching status" do
+              value(pending_model.status?("Pending")).must_equal(true)
+            end
+
+            it "returns false, GIVEN a non-matching status" do
+              value(pending_model.status?("Not Pending")).must_equal(false)
+            end
+
+            it "returns false, GIVEN nil" do
+              value(pending_model.status?(nil)).must_equal(false)
+            end
           end
 
-          it "returns false, GIVEN a non-matching status" do
-            value(pending_model.status?("Not Pending")).must_equal(false)
+          context "GIVEN an array of statuses" do
+            it "returns true, GIVEN at least one matching status" do
+              value(pending_model.status?(["Pending", "Not Pending"])).
+                must_equal(true)
+            end
+
+            it "returns false, GIVEN no matching statuses" do
+              value(pending_model.status?(["Not Pending", "Also Not Pending"])).
+                must_equal(false)
+            end
+
+            it "returns false, GIVEN an empty Array" do
+              value(pending_model.status?([])).
+                must_equal(false)
+            end
           end
         end
 

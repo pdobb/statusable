@@ -103,8 +103,9 @@ module Statusable::HasStatuses
       end
 
       # #status?("Ready")
+      # #status?(["Ready", "Not Ready"])
       define_method(:"#{col_name}?") do |a_status|
-        public_send(col_name) == a_status
+        Array(a_status).any?(public_send(col_name))
       end
 
       # #not_status?("Ready")
