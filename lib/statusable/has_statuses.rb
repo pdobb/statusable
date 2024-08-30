@@ -38,13 +38,10 @@ module Statusable::HasStatuses
       # Define an inclusion validation on the given `col_name` based on the
       # givien list of `statuses`, if requested.
       if validate_inclusion
+        message = "must be one of #{humanized_statuses_list}"
         validates(
           col_name,
-          inclusion: {
-            in: statuses,
-            allow_blank: true,
-            message: "must be one of #{humanized_statuses_list}",
-          })
+          inclusion: { in: statuses, allow_blank: true, message: message })
       end
 
       # NAMED SCOPES
@@ -58,13 +55,9 @@ module Statusable::HasStatuses
       #
       # @example Custom `col_name`
       #   .for_custom_col_name(<a_status_name>)
-      scope "for_#{col_name}", ->(status) {
-        where(
-          if status.is_a?(Array)
-            arel_column.in(status)
-          else
-            arel_column.eq(status)
-          end)
+      scope :"for_#{col_name}", ->(status) {
+        method_name = status.is_a?(Array) ? :in : :eq
+        where(arel_column.public_send(method_name, status))
       }
 
       # Define a named scope that filters out `col_name` records.
@@ -76,13 +69,9 @@ module Statusable::HasStatuses
       #
       # @example Custom `col_name`
       #   .not_for_custom_col_name(<a_status_name>)
-      scope "not_for_#{col_name}", ->(status) {
-        where(
-          if status.is_a?(Array)
-            arel_column.not_in(status)
-          else
-            arel_column.not_eq(status)
-          end)
+      scope :"not_for_#{col_name}", ->(status) {
+        method_name = status.is_a?(Array) ? :not_in : :not_eq
+        where(arel_column.public_send(method_name, status))
       }
 
       # Define a named scope that orders by `col_name`, ascending.
@@ -92,7 +81,7 @@ module Statusable::HasStatuses
       #
       # @example Custom `col_name`
       #   .by_custom_col_name_asc
-      scope "by_#{col_name}_asc", -> { order(arel_column) }
+      scope :"by_#{col_name}_asc", -> { order(arel_column) }
 
       # Define a named scope that orders by `col_name`, descending.
       #
@@ -101,7 +90,7 @@ module Statusable::HasStatuses
       #
       # @example Custom `col_name`
       #   .by_custom_col_name_desc
-      scope "by_#{col_name}_desc", -> { order(arel_column.desc) }
+      scope :"by_#{col_name}_desc", -> { order(arel_column.desc) }
 
       # Define a named scope that groups by `col_name`, ascending.
       #
@@ -110,7 +99,7 @@ module Statusable::HasStatuses
       #
       # @example Custom `col_name`
       #   .group_by_custom_col_name
-      scope "group_by_#{col_name}", -> { group(arel_column) }
+      scope :"group_by_#{col_name}", -> { group(arel_column) }
 
       # CLASS METHODS
 
@@ -231,7 +220,7 @@ module Statusable::HasStatuses
         # @example Custom `col_name`
         #   .for_custom_col_name_custom_1
         #   .for_custom_col_name_custom_2
-        scope "for_#{col_name}_#{status_name}",
+        scope :"for_#{col_name}_#{status_name}",
               -> { where(arel_column.eq(status)) }
 
         # Define a named scope that filters on `col_name` records that do not
@@ -244,7 +233,7 @@ module Statusable::HasStatuses
         # @example Custom `col_name`
         #   .not_for_custom_col_name_custom_1
         #   .not_for_custom_col_name_custom_2
-        scope "not_for_#{col_name}_#{status_name}",
+        scope :"not_for_#{col_name}_#{status_name}",
               -> { where(arel_column.not_eq(status)) }
 
         # CLASS METHODS
