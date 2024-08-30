@@ -110,7 +110,7 @@ module Statusable::HasStatuses
 
       # #not_status?("Ready")
       define_method(:"not_#{col_name}?") do |a_status|
-        public_send(col_name) != a_status
+        Array(a_status).none?(public_send(col_name))
       end
 
       statuses.each do |status| # rubocop:disable Metrics/BlockLength

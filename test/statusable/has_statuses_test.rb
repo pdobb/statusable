@@ -176,12 +176,36 @@ class Statusable::HasStatusesTest < Minitest::Spec
         end
 
         context "#not_status?" do
-          it "returns false, GIVEN a matching status" do
-            value(pending_model.not_status?("Pending")).must_equal(false)
+          context "GIVEN a single status" do
+            it "returns false, GIVEN a matching status" do
+              value(pending_model.not_status?("Pending")).must_equal(false)
+            end
+
+            it "returns true, GIVEN a non-matching status" do
+              value(pending_model.not_status?("Not Pending")).must_equal(true)
+            end
+
+            it "returns true, GIVEN nil" do
+              value(pending_model.not_status?(nil)).must_equal(true)
+            end
           end
 
-          it "returns true, GIVEN a non-matching status" do
-            value(pending_model.not_status?("Not Pending")).must_equal(true)
+          context "GIVEN an array of statuses" do
+            it "returns false, GIVEN at least one matching status" do
+              value(pending_model.not_status?(["Pending", "Not Pending"])).
+                must_equal(false)
+            end
+
+            it "returns true, GIVEN no matching statuses" do
+              value(
+                pending_model.not_status?(["Not Pending", "Also Not Pending"])).
+                must_equal(true)
+            end
+
+            it "returns true, GIVEN an empty Array" do
+              value(pending_model.not_status?([])).
+                must_equal(true)
+            end
           end
         end
 
