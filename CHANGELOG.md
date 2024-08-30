@@ -1,5 +1,6 @@
 ## [Unreleased]
 
+- Document the inner workings of `has_status` with YARD-style comments.
 - Can now check if any of an array of statuses doesn't match when using #not_status?
 
 ```ruby
