@@ -1,5 +1,6 @@
 ## [Unreleased]
 
+- Update minimum Ruby version from 2.7 -> 3.1
 - Document the inner workings of `has_status` with YARD-style comments.
 - Can now check if any of an array of statuses doesn't match when using #not_status?
 
