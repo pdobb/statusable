@@ -142,6 +142,7 @@ job.validate; job.errors[:status]
 The column name is customizable, as is whether or not to validate on presence or inclusion. Validating on inclusion means: ensuring that the current status value is included in the list of possible status values.
 
 Defaults:
+
 - `col_name = "status"`
 - `validate_presence = false`
 - `validate_inclusion = true`
@@ -244,6 +245,25 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/pdobb/
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. Or, run `rake` to run the tests plus linters as well as `yard` (to confirm proper YARD documentation practices). You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`.
+
+### Testing
+
+To test this gem (gemwork):
+
+```bash
+rake
+```
+
+#### Linters
+
+```bash
+rubocop
+
+reek
+
+npx prettier . --check
+npx prettier . --write
+```
 
 ### Releases
 
