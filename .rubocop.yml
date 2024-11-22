@@ -6,6 +6,9 @@ require:
 
 inherit_gem:
   gemwork: lib/rubocop/.rubocop.yml
+inherit_mode:
+  merge:
+    - Exclude
 
 AllCops:
   TargetRubyVersion: 3.1
