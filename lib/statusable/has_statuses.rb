@@ -10,9 +10,15 @@ module Statusable::HasStatuses
   extend ActiveSupport::Concern
 
   class_methods do # rubocop:disable Metrics/BlockLength
+    # :reek:TooManyStatements
+    # :reek:LongParameterList
+    # :reek:BooleanParameter
+    # :reek:ControlParameter
+    # :reek:DuplicateMethodCall
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     # rubocop:disable Naming/PredicateName
+
     def has_statuses(
           *args,
           col_name: "status",
@@ -354,6 +360,7 @@ module Statusable::HasStatuses
         end
       end
     end
+
     # rubocop:enable Naming/PredicateName
     # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/AbcSize
