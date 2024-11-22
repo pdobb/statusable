@@ -1,6 +1,7 @@
 # Statusable
 
 [![Gem Version](https://img.shields.io/github/v/release/pdobb/statusable)](https://img.shields.io/github/v/release/pdobb/statusable)
+[![CI Actions](https://github.com/pdobb/statusable/actions/workflows/ci.yml/badge.svg)](https://github.com/pdobb/statusable/actions)
 
 Statusable adds a `has_statuses` macro for defining common status-related methods for use with ActiveRecord objects / Relations.
 
