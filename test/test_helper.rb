@@ -24,15 +24,6 @@ end
 
 require "minitest/autorun"
 
-# require "gemwork/test/support/much_stub"
+require "gemwork/test/support/much_stub"
 require "gemwork/test/support/reporters"
 require "gemwork/test/support/spec_dsl"
-
-require "much-stub"
-
-# Augment the existing Minitest::Spec class.
-class Minitest::Spec
-  after do
-    MuchStub.unstub!
-  end
-end

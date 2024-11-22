@@ -122,7 +122,7 @@ GEM
       dry-logic (~> 1.4)
       zeitwerk (~> 2.6)
     erubi (1.13.0)
-    gemwork (0.7.1)
+    gemwork (0.7.2)
       debug
       irb
       minitest

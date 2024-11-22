@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+- Fix internal much_stub test/support reference. No external-facing change.
+
 ### 0.4.0 - 2024-11-21
 
 - Update minimum Ruby version from 2.7 -> 3.1
