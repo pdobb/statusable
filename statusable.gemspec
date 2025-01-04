@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = "Statusable adds a `has_statuses` macro for defining common status-related methods for use with ActiveRecord objects / Relations."
   spec.homepage = "https://github.com/pdobb/statusable"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 3.1"
+  spec.required_ruby_version = ">= 3.2"
 
   spec.metadata = {
     "bug_tracker_uri" => "https://github.com/pdobb/statusable/issues",
